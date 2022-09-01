@@ -5,9 +5,23 @@ import { CarSelectorContext } from '../context/AppStepsContext'
 
 const SelectModel = () => {
 
-    const { avaialableModels, selectedModel, setSelectedModel } = useContext(CarSelectorContext)
+    const {selectedYear,  avaialableModels, selectedModel, setSelectedModel, selectedMake, setAvailableModels } = useContext(CarSelectorContext)
 
-    
+    //get all available Car models after year & make selection
+    useEffect(() => {
+        axios.get('https://www.fueleconomy.gov/ws/rest/vehicle/menu/model', {
+            params: {
+                year: selectedYear,
+                make: selectedMake
+            }
+        })
+            .then(function (response) {
+                setAvailableModels(response.data.menuItem)
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }, [selectedMake])
 
     return (
         <div>

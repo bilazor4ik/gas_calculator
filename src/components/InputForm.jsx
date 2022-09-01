@@ -9,7 +9,7 @@ import SelectOptions from './SelectOptions'
 
 const InputForm = () => {
 
-  const { avaialableMakes, avaialableModels, avaialableOptions, carID } = useContext(CarSelectorContext)
+  const { selectedYear,selectedMake, selectedModel, carID } = useContext(CarSelectorContext)
 
   return (
     <>
@@ -18,9 +18,9 @@ const InputForm = () => {
 
 
         <SelectYear />
-        {avaialableMakes.length > 0 && <SelectMake />}
-        {avaialableModels.length > 0 && <SelectModel />}
-        {avaialableOptions.length > 0 && <SelectOptions />}
+        {selectedYear && <SelectMake />}
+        {selectedMake && <SelectModel />}
+        {selectedModel && <SelectOptions />}
 
 
       </form>
