@@ -21,10 +21,11 @@ export const CarSelectorContextProvider = ({ children }) => {
     const [selectedOption, setSelectedOption] = useState("")
 
 
-    // Available Car Options after selection year, make and model
-    const [carID, setCarID] = useState("")
+    // set Car ID after all options selected
+    const [carID, setCarID] = useState(selectedOption)
 
 
+    const [selectionProcess, setSelectionProcess] = useState(false)
     //get all available years initially 
     useEffect(() => {
         axios.get('https://www.fueleconomy.gov/ws/rest/vehicle/menu/year')
@@ -37,6 +38,8 @@ export const CarSelectorContextProvider = ({ children }) => {
 
 
     }, [])
+
+    
 
     
 
@@ -58,7 +61,9 @@ export const CarSelectorContextProvider = ({ children }) => {
               selectedOption, 
               setSelectedOption,
               carID, 
-              setCarID
+              setCarID,
+              selectionProcess,
+              setSelectionProcess
         }}>
 
             {children}

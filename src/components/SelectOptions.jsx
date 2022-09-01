@@ -13,7 +13,9 @@ const SelectOptions = () => {
         selectedOption, 
         setSelectedOption, 
         carID, 
-        setCarID } = useContext(CarSelectorContext)
+        setCarID,
+        setSelectionDone
+         } = useContext(CarSelectorContext)
 
 
 
@@ -27,7 +29,7 @@ const SelectOptions = () => {
             }
         })
             .then(function (response) {
-                console.log(response.data)
+                
                 setAvailableOptions(response.data.menuItem)
 
             })
@@ -37,10 +39,12 @@ const SelectOptions = () => {
     }, [selectedModel])
 
 
-    const handleOptions = (e) => {
+    const handleOptions =  (e) => {
+        
         setSelectedOption(e.target.value)
-        setCarID(e.target.value)
-        console.log(carID)
+        setSelectionDone(true)
+       
+        
     }
     return (
         <div>

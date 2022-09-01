@@ -9,7 +9,7 @@ import SelectOptions from './SelectOptions'
 
 const InputForm = () => {
 
-  const { selectedYear,selectedMake, selectedModel, carID } = useContext(CarSelectorContext)
+  const { selectedYear,selectedMake, selectedModel, selectionDone } = useContext(CarSelectorContext)
 
   return (
     <>
@@ -24,7 +24,8 @@ const InputForm = () => {
 
 
       </form>
-      {carID ? `Selected Car ID :${carID}` : null}
+      
+      <p className='text-white'>{selectionDone ? 'Done' : 'not Done'}</p>
     </>
 
   )
