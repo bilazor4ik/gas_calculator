@@ -14,12 +14,15 @@ const InputForm = () => {
   return (
     <>
 
-      <form className="space-y-8 divide-y divide-gray-200 bg-gray-50 px-5 py-8">
+      <form className="space-y-4 divide-y divide-solid  divide-gray-200 bg-gray-50 px-5 py-8">
 
 
         <SelectYear />
+        
         {selectedYear && <SelectMake />}
+        
         {selectedMake && <SelectModel />}
+        
         {selectedModel && <SelectOptions />}
 
 
