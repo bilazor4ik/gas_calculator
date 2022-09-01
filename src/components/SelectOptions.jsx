@@ -20,7 +20,9 @@ const SelectOptions = () => {
         setSelectedOption,
         carID,
         setCarID,
-        setSelectionDone
+        selectionDone,
+        setSelectionDone,
+        getCarEmission
     } = useContext(CarSelectorContext)
 
 
@@ -45,14 +47,11 @@ const SelectOptions = () => {
     }, [selectedModel])
 
 
-    const handleOptions = (e) => {
-
-        setSelectedOption(e.target.value)
-        setSelectionDone(true)
-    }
-
     const handleChange =(args)=>{
         setSelectedOption(args.text)
+        setSelectionDone(true)
+        setCarID(args.value)
+        getCarEmission()
     }
     return (
         <>

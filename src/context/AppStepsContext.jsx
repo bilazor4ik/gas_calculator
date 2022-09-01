@@ -24,8 +24,10 @@ export const CarSelectorContextProvider = ({ children }) => {
     // set Car ID after all options selected
     const [carID, setCarID] = useState(selectedOption)
 
+    const [mpg, setMpg] = useState('')
+    
 
-    const [selectionProcess, setSelectionProcess] = useState(false)
+
     //get all available years initially 
     useEffect(() => {
         axios.get('https://www.fueleconomy.gov/ws/rest/vehicle/menu/year')
@@ -39,7 +41,21 @@ export const CarSelectorContextProvider = ({ children }) => {
 
     }, [])
 
+     //get all available years initially 
+     const getCarEmission = () => {
+        axios.get(`https://www.fueleconomy.gov/ws/rest/vehicle/${carID}`)
+            .then(function (response) {
+                setMpg(response.data.comb08)
+                console.log(response.data.comb08)
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+
+
+    }
     
+    const [selectionDone, setSelectionDone] = useState(false)
 
     
 
@@ -62,8 +78,10 @@ export const CarSelectorContextProvider = ({ children }) => {
               setSelectedOption,
               carID, 
               setCarID,
-              selectionProcess,
-              setSelectionProcess
+              selectionDone,
+              setSelectionDone,
+              getCarEmission,
+              mpg
         }}>
 
             {children}
