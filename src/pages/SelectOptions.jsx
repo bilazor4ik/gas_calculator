@@ -51,7 +51,7 @@ const SelectOptions = () => {
             });
         try {
             getOptions()
-            console.log(availableOptions)
+           
         } catch (error) {
             console.log(error)
         }
@@ -79,7 +79,7 @@ const SelectOptions = () => {
 
                 return newState;
             });
-        navigate('/selectOptions')
+        navigate('/final')
     }
     if (loading) {
         return <DisplayLoading />

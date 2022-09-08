@@ -25,7 +25,7 @@ const SelectModel = () => {
         })
             .then(function (response) {
                 setAvailableModels(response.data.menuItem)
-                console.log(response.data.menuItem)
+                
             })
             .catch(function (error) {
                 console.log(error);
@@ -49,7 +49,7 @@ const SelectModel = () => {
             });
         try {
             getModels()
-            console.log(availableModels)
+            
         } catch (error) {
             console.log(error)
         }
