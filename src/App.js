@@ -1,28 +1,41 @@
-import HeroSection from "./components/HeroSection";
-import InputForm from "./components/InputForm";
-import { CarSelectorContextProvider } from "./context/AppStepsContext";
+import { Route, Routes } from "react-router-dom";
+import SharedStepsHeader from "./components/SharedStepsHeader";
+
+import { CarSelectionContext, CarSelectionContextProvider } from "./context/CarSelectionContext";
+import { SelectionStepsContextProvider } from "./context/SelectionStepsContext";
+import { StartedContextProvider } from "./context/StartedContext";
+import Home from "./pages/Home";
+import SelectMake from "./pages/SelectMake";
+import SelectModel from "./pages/SelectModel";
+import SelectOptions from "./pages/SelectOptions";
+import SelectYear from "./pages/SelectYear";
 
 function App() {
   return (
     <>
-      <CarSelectorContextProvider>
-        <div className="min-h-screen bg-gray-900 pt-24">
+      <div className="min-h-screen max-w-7xl mx-auto ">
 
 
+        <CarSelectionContextProvider>
+          <StartedContextProvider>
+            <SelectionStepsContextProvider>
 
-          <HeroSection />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route element={<SharedStepsHeader />}>
+                  <Route path='selectYear' element={<SelectYear />} />
+                  <Route path='selectMake' element={<SelectMake />} />
+                  <Route path='selectModel' element={<SelectModel />} />
+                  <Route path='selectOptions' element={<SelectOptions />} />
 
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            {/* We've used 3xl here, but feel free to try other max-widths based on your needs */}
-            <div className="mx-auto max-w-3xl pt-8">
+                </Route>
 
 
-              <InputForm />
-            </div>
-          </div>
-        </div>
-
-      </CarSelectorContextProvider>
+              </Routes>
+            </SelectionStepsContextProvider>
+          </StartedContextProvider>
+        </CarSelectionContextProvider>
+      </div>
     </>
   );
 }
