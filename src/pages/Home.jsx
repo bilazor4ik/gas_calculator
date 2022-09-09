@@ -1,27 +1,14 @@
-import React, { useContext } from 'react'
-import { StartedContext } from '../context/StartedContext'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const steps = [
-  { id: '01', name: 'Job details', href: '#', status: 'complete' },
-  { id: '02', name: 'Application form', href: '#', status: 'current' },
-  { id: '03', name: 'Preview', href: '#', status: 'upcoming' },
-]
-
-
 const Home = () => {
-    const { started, setStarted } = useContext(StartedContext)
+    
   const navigate = useNavigate()
-  const startButtonHandle = () =>{
-    setStarted(true) 
-    navigate('selectYear')
-  }
+  
     
   return (
-
-
     <div className="min-h-screen bg-gray-900  flex justify-center align-middle">
-      <main className={started ? 'mt-24' : "m-auto  max-w-7xl" }>
+      <main className="m-auto  max-w-7xl">
       <div className="text-center">
         <h1 className="text-4xl font-bold tracking-tight text-gray-100 sm:text-5xl md:text-6xl">
           <span className="block xl:inline">Gas usage</span>{' '}
@@ -36,7 +23,7 @@ const Home = () => {
             <div className="rounded-md shadow">
               <button
                 className="flex w-full items-center justify-center rounded-md border border-transparent bg-orange-400 px-8 py-3 text-base font-medium text-white hover:bg-orange-700 md:py-4 md:px-10 md:text-lg"
-                onClick={() => {startButtonHandle()}}
+                onClick={() => {navigate('selectYear')}}
               >
                 Get started
               </button>

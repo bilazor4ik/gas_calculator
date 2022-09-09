@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import SharedStepsHeader from "./components/SharedStepsHeader";
 
-import { CarSelectionContext, CarSelectionContextProvider } from "./context/CarSelectionContext";
+import { CarSelectionContextProvider } from "./context/CarSelectionContext";
 import { SelectionStepsContextProvider } from "./context/SelectionStepsContext";
-import { StartedContextProvider } from "./context/StartedContext";
+
 import Final from "./pages/Final";
 import Home from "./pages/Home";
 import SelectMake from "./pages/SelectMake";
@@ -18,7 +18,7 @@ function App() {
 
 
         <CarSelectionContextProvider>
-          <StartedContextProvider>
+          
             <SelectionStepsContextProvider>
 
               <Routes>
@@ -35,7 +35,7 @@ function App() {
 
               </Routes>
             </SelectionStepsContextProvider>
-          </StartedContextProvider>
+          
         </CarSelectionContextProvider>
       </div>
     </>

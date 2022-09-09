@@ -16,33 +16,33 @@ const SelectMake = () => {
     const { steps, setSteps } = useContext(SelectionStepsContext)
     const navigate = useNavigate()
     const getMakes = async () => {
-       
-            axios.get('https://www.fueleconomy.gov/ws/rest/vehicle/menu/make', {
-                params: {
-                    year: selectedYear
-                }
+
+        axios.get('https://www.fueleconomy.gov/ws/rest/vehicle/menu/make', {
+            params: {
+                year: selectedYear
+            }
+        })
+            .then(function (response) {
+
+                setAvailableMakes(response.data.menuItem)
+
             })
-                .then(function (response) {
-    
-                    setAvailableMakes(response.data.menuItem)
-    
-                })
-                .catch(function (error) {
-                    console.log(error);
-                })
-        
+            .catch(function (error) {
+                console.log(error);
+            })
+
     }
     useEffect(() => {
-        //Check status 
+
         setLoading(true)
         setSteps(
             prevState => {
                 const newState = prevState.map(obj => {
-                   
+
                     if (obj.id === "02") {
                         return { ...obj, status: 'current' };
                     }
-                    
+
                     return obj;
                 });
 
@@ -54,7 +54,7 @@ const SelectMake = () => {
         } catch (error) {
             console.log(error)
         }
-        
+
         const timer = setTimeout(() => {
             setLoading(false)
         }, 1000)
@@ -68,17 +68,18 @@ const SelectMake = () => {
         setSteps(
             prevState => {
                 const newState = prevState.map(obj => {
-                   
-                    if (obj.id === "02") {
-                        return { ...obj, status: 'complete' };
+
+                    if (obj.id === 2) {
+                        console.log('You are inside of condition')
+                        return { ...obj, status: 'complete', value: e.target.value };
                     }
-                    
+                    console.log('You are in else')
                     return obj;
                 });
 
                 return newState;
-            });
-            navigate('/selectModel')
+            })
+        navigate('/selectModel')
     }
     if (loading) {
         return <DisplayLoading />

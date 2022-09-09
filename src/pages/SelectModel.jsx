@@ -25,7 +25,7 @@ const SelectModel = () => {
         })
             .then(function (response) {
                 setAvailableModels(response.data.menuItem)
-                
+
             })
             .catch(function (error) {
                 console.log(error);
@@ -49,7 +49,7 @@ const SelectModel = () => {
             });
         try {
             getModels()
-            
+
         } catch (error) {
             console.log(error)
         }
@@ -68,17 +68,18 @@ const SelectModel = () => {
             prevState => {
                 const newState = prevState.map(obj => {
 
-                    if (obj.id === "03") {
-                        return { ...obj, status: 'complete' };
+                    if (obj.id === 3) {
+                        console.log('You are inside of condition')
+                        return { ...obj, status: 'complete', value: e.target.value };
                     }
-
+                    console.log('You are in else')
                     return obj;
                 });
 
                 return newState;
             });
-        navigate('/selectOptions')
-    }
+       navigate('/selectOptions')
+    }   
     if (loading) {
         return <DisplayLoading />
     } else {

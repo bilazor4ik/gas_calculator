@@ -11,9 +11,10 @@ function classNames(...classes) {
 }
 const SelectOptions = () => {
     const [availableOptions, setAvailableOptions] = useState([])
-    const { selectedYear, selectedMake, selectedModel, setSelectedModel, selectedOption, setSelectedOption } = useContext(CarSelectionContext)
+    const { selectedYear, selectedMake, selectedModel, selectedOption, setSelectedOption, selectedCarId, setSelectedCarId } = useContext(CarSelectionContext)
     const [loading, setLoading] = useState(false)
     const { steps, setSteps } = useContext(SelectionStepsContext)
+    const [valueAndText, setValueAndText] = useState([' ',' '])
     const navigate = useNavigate()
     const getOptions = async () => {
 
@@ -70,8 +71,8 @@ const SelectOptions = () => {
             prevState => {
                 const newState = prevState.map(obj => {
 
-                    if (obj.id === "04") {
-                        return { ...obj, status: 'complete' };
+                    if (obj.id === 4) {
+                        return { ...obj, status: 'complete', value:e.target.value};
                     }
 
                     return obj;
@@ -79,7 +80,7 @@ const SelectOptions = () => {
 
                 return newState;
             });
-        navigate('/final')
+        navigate("/final")
     }
     if (loading) {
         return <DisplayLoading />
@@ -88,12 +89,12 @@ const SelectOptions = () => {
             <>
                 <label htmlFor="make" className='block text-4xl text-gray-200 pb-8'>Car Options</label>
                 <select id='make' className="form-select px-4 py-3 rounded-full w-64"
-                    value={selectedOption}
+                    
                     onChange={handleOptionSelection}>
                     <option>Select Your Options</option>
                     {availableOptions.length > 0 ? (
-                    availableOptions.map((make, index) => { return <option key={index} value={make.value}>{make.text}</option>})) : ( 
-                        <option value={availableOptions.value}>{availableOptions.text}</option>
+                    availableOptions.map((make, index) => { return <option key={index} value={make.value} >{make.text}</option>})) : ( 
+                        <option value={availableOptions.value} >{availableOptions.text}</option>
                      )}
                 </select>
 

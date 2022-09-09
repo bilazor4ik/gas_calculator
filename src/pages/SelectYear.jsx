@@ -49,8 +49,8 @@ const SelectYear = () => {
             prevState => {
                 const newState = prevState.map(obj => {
                     
-                    if (obj.id === "01") {
-                        return { ...obj, status: 'complete' };
+                    if (obj.id === 1) {
+                        return { ...obj, status: 'complete', value:e.target.value };
                     }
                     
                     return obj;

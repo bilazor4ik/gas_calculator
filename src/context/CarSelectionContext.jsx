@@ -7,11 +7,12 @@ export const CarSelectionContextProvider = ({children})=>{
     const  [selectedMake, setSelectedMake] = useState('')
     const [selectedModel, setSelectedModel] = useState("")
     const [selectedOption, setSelectedOption] = useState("")
+    const [selectedCarId, setSelectedCarId] = useState("")
     
     return (
 
         <CarSelectionContext.Provider value={{
-            selectedYear, setSelectedYear, selectedMake, setSelectedMake, selectedModel, setSelectedModel, selectedOption, setSelectedOption
+            selectedYear, setSelectedYear, selectedMake, setSelectedMake, selectedModel, setSelectedModel, selectedOption, setSelectedOption,selectedCarId, setSelectedCarId
         }}>
             {children}
         </CarSelectionContext.Provider>

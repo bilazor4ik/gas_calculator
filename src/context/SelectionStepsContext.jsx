@@ -5,10 +5,10 @@ export const SelectionStepsContext = createContext()
 export const SelectionStepsContextProvider = ({children}) =>{
     const { selectedYear, selectedMake, selectedModel, selectedOption} = useContext(CarSelectionContext)
     const [steps, setSteps] = useState([
-        { id: '01', name: 'Car year', href: '/selectYear', status: 'current' },
-        { id: '02', name: 'Car Manufacturer', href: '/selectMake', status: 'upcoming'},
-        { id: '03', name: 'Car Model', href: '/selectModel', status: 'upcoming'},
-        { id: '04', name: 'Car Options', href: '/selectOptions', status: 'upcoming' },
+        { id: 1, name: 'Car year',  status: 'current', value: '' },
+        { id: 2, name: 'Car Manufacturer',  status: 'upcoming', value: ''},
+        { id: 3, name: 'Car Model',  status: 'upcoming', value: ''},
+        { id: 4, name: 'Car Options',  status: 'upcoming', value: '', friendly:""},
       ])
     
     return (
