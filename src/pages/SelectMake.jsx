@@ -33,6 +33,7 @@ const SelectMake = () => {
         
     }
     useEffect(() => {
+        //Check status 
         setLoading(true)
         setSteps(
             prevState => {
@@ -53,7 +54,7 @@ const SelectMake = () => {
         } catch (error) {
             console.log(error)
         }
-
+        
         const timer = setTimeout(() => {
             setLoading(false)
         }, 1000)

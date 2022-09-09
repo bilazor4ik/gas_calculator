@@ -48,11 +48,11 @@ const SelectYear = () => {
         setSteps(
             prevState => {
                 const newState = prevState.map(obj => {
-                    // 👇️ if id equals 2, update country property
+                    
                     if (obj.id === "01") {
                         return { ...obj, status: 'complete' };
                     }
-                    // 👇️ otherwise return object as is
+                    
                     return obj;
                 });
 
