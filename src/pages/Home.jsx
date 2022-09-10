@@ -32,7 +32,7 @@ const Home = () => {
 
           </div>
         
-<DisplayLoading/>
+
       </div>
     </main>
         </div>
