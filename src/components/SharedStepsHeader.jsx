@@ -99,7 +99,7 @@ export default function SharedStepsHeader() {
           })}
         </ol>
       </nav>
-      <div className="min-h-screen bg-gray-900 pt-64 px-64 text-center">
+      <div className="min-h-screen pt-8 bg-gray-900 md:pt-64 md:px-64 text-center">
         <Outlet />
       </div>
     </>

@@ -1,4 +1,8 @@
 import { Route, Routes } from "react-router-dom";
+import { ProtectedRouteFinal } from "./components/ProtectedRouteFinal";
+import { ProtectedRouteMake } from "./components/ProtectedRouteMake";
+import { ProtectedRouteModel } from "./components/ProtectedRouteModel";
+import { ProtectedRouteOption } from "./components/ProtectedRouteOption";
 import SharedStepsHeader from "./components/SharedStepsHeader";
 
 import { CarSelectionContextProvider } from "./context/CarSelectionContext";
@@ -11,10 +15,11 @@ import SelectModel from "./pages/SelectModel";
 import SelectOptions from "./pages/SelectOptions";
 import SelectYear from "./pages/SelectYear";
 
+ 
 function App() {
   return (
     <>
-      <div className="min-h-screen max-w-7xl mx-auto ">
+      <div className="min-h-screen mx-auto ">
 
 
         <CarSelectionContextProvider>
@@ -25,10 +30,10 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route element={<SharedStepsHeader />}>
                   <Route path='selectYear' element={<SelectYear />} />
-                  <Route path='selectMake' element={<SelectMake />} />
-                  <Route path='selectModel' element={<SelectModel />} />
-                  <Route path='selectOptions' element={<SelectOptions />} />
-                  <Route path='final' element={<Final />} />
+                  <Route path='selectMake' element={<ProtectedRouteMake><SelectMake /></ProtectedRouteMake>} />
+                  <Route path='selectModel' element={<ProtectedRouteModel><SelectModel /></ProtectedRouteModel>} />
+                  <Route path='selectOptions' element={<ProtectedRouteOption><SelectOptions /></ProtectedRouteOption>} />
+                  <Route path='final' element={<ProtectedRouteFinal><Final /></ProtectedRouteFinal>} />
 
                 </Route>
 

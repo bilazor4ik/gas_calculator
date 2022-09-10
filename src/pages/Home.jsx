@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import DisplayLoading from '../components/DisplayLoading'
 
 const Home = () => {
     
@@ -31,7 +32,7 @@ const Home = () => {
 
           </div>
         
-
+<DisplayLoading/>
       </div>
     </main>
         </div>

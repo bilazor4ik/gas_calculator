@@ -70,10 +70,10 @@ const SelectMake = () => {
                 const newState = prevState.map(obj => {
 
                     if (obj.id === 2) {
-                        console.log('You are inside of condition')
+                        
                         return { ...obj, status: 'complete', value: e.target.value };
                     }
-                    console.log('You are in else')
+                
                     return obj;
                 });
 
