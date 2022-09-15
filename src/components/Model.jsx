@@ -4,6 +4,7 @@ import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import axios from 'axios'
 import { CarSelectorContext } from '../context/CarSelectorContext'
+import Loader from './Loader'
 
 
 function classNames(...classes) {
@@ -22,13 +23,20 @@ const getModels = async () => {
             make: state[1].selectedMake
         }
     })
-        .then(function (response) {
-            setAvailableModels(response.data.menuItem)
+    .then(function (response){
+      if (response.status == 200) {
+          if (Array.isArray(response.data.menuItem)) {
 
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
+            setAvailableModels(response.data.menuItem)
+          } else {
+            setAvailableModels([response.data.menuItem])
+          }
+
+      }
+  })
+  .catch(function (error) {
+      console.log(error);
+  })
 
 }
 
@@ -38,7 +46,11 @@ const getModels = async () => {
     } catch (error) {
       console.log(error)
     }
-    setLoading(false)
+    const timer = setTimeout(()=>{
+      setLoading(false)
+      
+    },1000)
+    
     
   }, [])
 
@@ -49,7 +61,7 @@ const handleSelect = (e)=>{
 }
 
   if (loading) {
-    return 'loading'
+    return <Loader/>
   }
   
   if(!loading && availableModel.length > 0){
@@ -80,7 +92,7 @@ const handleSelect = (e)=>{
                       key={year.value}
                       className={({ active }) =>
                         classNames(
-                          active ? 'text-orange-400 font-bold' : 'text-gray-300',
+                          active ? 'text-orange-400 font-bold' : 'text-gray-800 dark:text-gray-300',
                           'relative cursor-pointer select-none py-2 pl-3 pr-9'
                         )
                       }

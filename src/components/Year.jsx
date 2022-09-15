@@ -4,6 +4,7 @@ import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import axios from 'axios'
 import { CarSelectorContext } from '../context/CarSelectorContext'
+import Loader from './Loader'
 
 
 function classNames(...classes) {
@@ -26,12 +27,17 @@ const {handleYearSelection} = useContext(CarSelectorContext)
   }
 
   useEffect(() => {
+    setLoading(true)
     try {
       getYears()
     } catch (error) {
       console.log(error)
     }
-    setLoading(false)
+    
+    const timer = setTimeout(()=>{
+      setLoading(false)
+      console.log('hey')
+    },1000)
     
   }, [])
 
@@ -41,12 +47,13 @@ const handleSelect = (e)=>{
 }
 
   if (loading) {
-    return 'loading'
+    return <Loader/>
   }
   
   if(!loading && availableYears.length > 0){
   return (
     <>
+   
     <Listbox value={selectedYear} onChange={handleSelect} className="w-96">
         {({ open }) => (
           <>
@@ -72,7 +79,7 @@ const handleSelect = (e)=>{
                       key={year.value}
                       className={({ active }) =>
                         classNames(
-                          active ? 'text-orange-400 font-bold' : 'text-gray-300',
+                          active ? 'text-orange-400 font-bold' : 'text-gray-800 dark:text-gray-300',
                           'relative cursor-pointer select-none py-2 pl-3 pr-9'
                         )
                       }
@@ -87,7 +94,7 @@ const handleSelect = (e)=>{
                           {selectedYear ? (
                             <span
                               className={classNames(
-                                active ? 'text-white' : 'text-indigo-600',
+                                active ? 'text-white' : 'text-orange-600',
                                 'absolute inset-y-0 right-0 flex items-center pr-4'
                               )}
                             >

@@ -4,6 +4,7 @@ import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import axios from 'axios'
 import { CarSelectorContext } from '../context/CarSelectorContext'
+import Loader from './Loader'
 
 
 function classNames(...classes) {
@@ -16,58 +17,62 @@ const Option = () => {
     const { state, handleOptionSelection } = useContext(CarSelectorContext)
 
     const getAvailableOptions = async () => {
-        try {
-
-
-            const res = await axios.get('https://www.fueleconomy.gov/ws/rest/vehicle/menu/options', {
+        await axios.get('https://www.fueleconomy.gov/ws/rest/vehicle/menu/options', {
                 params: {
                     year: state[0].selectedYear,
                     make: state[1].selectedMake,
                     model: state[2].selectedModel,
                 }
             })
-            if (res.status == 200) {
-                if(Array.isArray(res.data.menuItem)){
-
-                    setAvailableOptions(res.data.menuItem)
-                }else{
-                    setAvailableOptions([res.data.menuItem])
+            .then(function (response){
+                if (response.status == 200) {
+                    if (Array.isArray(response.data.menuItem)) {
+    
+                        setAvailableOptions(response.data.menuItem)
+                    } else {
+                        setAvailableOptions([response.data.menuItem])
+                    }
+    
                 }
-                
-            }
-        } catch (err) {
-            console.error(err);
-        }
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+            
+        
     }
 
     useEffect(() => {
         try {
             getAvailableOptions()
         } catch (error) {
-          console.log(error)
+            console.log(error)
         }
-        setLoading(false)
-        
-      }, [])
+        const timer = setTimeout(() => {
+            setLoading(false)
+            console.log('hey')
+        }, 1000)
 
-      
+    }, [])
+
+
     const handleSelect = (e) => {
-      
+
         setSelectedOption(e.text)
         handleOptionSelection(e)
     }
 
     if (loading) {
-        return 'loadisng'
-      }
-      
-    
-      if(!loading &&  availableOptions.length > 0){
-        
-        
+        return <Loader />
+    }
+
+
+    if (!loading && availableOptions.length > 0) {
+
+
         return (
             <>
-                
+
                 <Listbox value={selectedOption} onChange={handleSelect} className="w-96">
                     {({ open }) => (
                         <>
@@ -93,7 +98,7 @@ const Option = () => {
                                                 key={option.value}
                                                 className={({ active }) =>
                                                     classNames(
-                                                        active ? 'text-orange-400 font-bold' : 'text-gray-300',
+                                                        active ? 'text-orange-400 font-bold' : 'text-gray-800 dark:text-gray-300',
                                                         'relative cursor-pointer select-none py-2 pl-3 pr-9'
                                                     )
                                                 }
