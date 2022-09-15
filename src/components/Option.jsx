@@ -3,14 +3,15 @@ import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import axios from 'axios'
-import { CarSelectorContext } from '../../CarSelectorContext'
+import { CarSelectorContext } from '../context/CarSelectorContext'
+
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 const Option = () => {
     const [availableOptions, setAvailableOptions] = useState([])
-    const [selectedOption, setSelectedOption] = useState('')
+    const [selectedOption, setSelectedOption] = useState('Select Option')
     const [loading, setLoading] = useState(true)
     const { state, handleOptionSelection } = useContext(CarSelectorContext)
 
@@ -49,13 +50,7 @@ const Option = () => {
         
       }, [])
 
-      useEffect(()=>{
-        if(!loading &&  availableOptions.length > 0){
-
-            setSelectedOption(availableOptions[0].text)
-        }
-      },[availableOptions])
-
+      
     const handleSelect = (e) => {
       
         setSelectedOption(e.text)

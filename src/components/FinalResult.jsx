@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useContext, useState } from 'react'
 import { useEffect } from 'react';
-import { CarSelectorContext } from '../../CarSelectorContext';
+import { CarSelectorContext } from '../context/CarSelectorContext';
+
 
 const FinalResult = () => {
     const { state } = useContext(CarSelectorContext)

@@ -1,6 +1,6 @@
 import { MoonIcon, SunIcon } from '@heroicons/react/24/solid'
 import React, { useContext } from 'react'
-import { DarkModeContext } from './context/DarkModeContext';
+import { DarkModeContext } from '../context/DarkModeContext';
 
 const DarkModeSelector = () => {
     const { darkMode, setDarkMode } = useContext(DarkModeContext);

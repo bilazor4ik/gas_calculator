@@ -3,30 +3,37 @@ import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import axios from 'axios'
-import {CarSelectorContext} from '../../CarSelectorContext'
+import { CarSelectorContext } from '../context/CarSelectorContext'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
-const Year = () => {
-  const [availableYears, setAvailableYears] = useState([])
-  const [selectedYear, setSelectedYear] = useState('')
+const Make = () => {
+  const [availableMakes, setAvailableMakes] = useState([])
+  const [selectedMake, setSelectedMake] = useState('Select Car Make')
   const [loading, setLoading] = useState(true)
-const {handleYearSelection} = useContext(CarSelectorContext)
-  const getYears = async () => {
-    axios.get('https://www.fueleconomy.gov/ws/rest/vehicle/menu/year')
-      .then(function (response) {
-        setAvailableYears(response.data.menuItem)
-       
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-  }
+const {state, handleMakeSelection} = useContext(CarSelectorContext)
+const getMakes = async () => {
+
+    axios.get('https://www.fueleconomy.gov/ws/rest/vehicle/menu/make', {
+        params: {
+            year: state[0].selectedYear
+        }
+    })
+        .then(function (response) {
+
+            setAvailableMakes(response.data.menuItem)
+
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+
+}
 
   useEffect(() => {
     try {
-      getYears()
+        getMakes()
     } catch (error) {
       console.log(error)
     }
@@ -34,31 +41,26 @@ const {handleYearSelection} = useContext(CarSelectorContext)
     
   }, [])
 
-  useEffect(()=>{
-    if(availableYears.length > 0){
-      setSelectedYear(availableYears[0].text)
-    }
-  },[availableYears])
-
+ 
 const handleSelect = (e)=>{
-  setSelectedYear(e)
-  handleYearSelection(e)
+    setSelectedMake(e)
+    handleMakeSelection(e)
 }
 
   if (loading) {
     return 'loading'
   }
   
-  if(!loading && availableYears.length > 0){
+  if(!loading && availableMakes.length > 0){
   return (
     <>
-    <Listbox value={selectedYear} onChange={handleSelect} className="w-96">
+    <Listbox value={selectedMake} onChange={handleSelect} className="w-96">
         {({ open }) => (
           <>
-            <Listbox.Label className=" text-center block text-sm font-medium text-gray-700 dark:text-orange-400 ">Car Year</Listbox.Label>
+            <Listbox.Label className=" text-center block text-sm font-medium text-gray-700 dark:text-orange-400 ">Car Make</Listbox.Label>
             <div className="relative mt-1 text-center">
               <Listbox.Button className="relative w-52 mx-auto cursor-pointer text-gray-900 rounded-md border border-gray-300 bg-white dark:text-gray-200 dark:bg-gray-700 dark:border-gray-900 py-2 pl-3 pr-10 text-left shadow-sm focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500 sm:text-sm">
-                <span className="block truncate">{selectedYear ? selectedYear : null}</span>
+                <span className="block truncate">{selectedMake ? selectedMake : null}</span>
                 <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                   <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
                 </span>
@@ -72,7 +74,7 @@ const handleSelect = (e)=>{
                 leaveTo="opacity-0"
               >
                 <Listbox.Options className="absolute z-10 mt-1 max-h-60 left-0 right-0 w-52 m-auto overflow-auto rounded-md bg-white dark:text-gray-200 dark:bg-gray-700  py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                  {availableYears.map((year) => (
+                  {availableMakes.map((year) => (
                     <Listbox.Option
                       key={year.value}
                       className={({ active }) =>
@@ -83,13 +85,13 @@ const handleSelect = (e)=>{
                       }
                       value={year.value}
                     >
-                      {({ selectedYear, active }) => (
+                      {({ selectedMake, active }) => (
                         <>
-                          <span className={classNames(selectedYear ? 'font-semibold' : 'font-normal', 'block truncate')}>
+                          <span className={classNames(selectedMake ? 'font-semibold' : 'font-normal', 'block truncate')}>
                             {year.text}
                           </span>
 
-                          {selectedYear ? (
+                          {selectedMake ? (
                             <span
                               className={classNames(
                                 active ? 'text-white' : 'text-indigo-600',
@@ -116,4 +118,4 @@ const handleSelect = (e)=>{
   }
 }
 
-export default Year
+export default Make

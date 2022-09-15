@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import { reducer } from "./context/reducer";
+import { reducer } from "./reducer";
 
 export const CarSelectorContext = createContext()
 

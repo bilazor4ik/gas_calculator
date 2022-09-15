@@ -1,15 +1,9 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { CheckIcon } from '@heroicons/react/24/solid'
 import { useContext } from 'react'
-import { CarSelectorContext } from '../../CarSelectorContext'
-/*
-{
-  step: '01',
-  name: 'Car Year',
-  status: 'current',
-  selectedYear: ''
-},
-*/
+import { CarSelectorContext } from '../context/CarSelectorContext'
+
+
 export default function Steps() {
   const {state} = useContext(CarSelectorContext)
  

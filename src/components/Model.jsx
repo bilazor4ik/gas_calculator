@@ -3,14 +3,15 @@ import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import axios from 'axios'
-import {CarSelectorContext} from '../../CarSelectorContext'
+import { CarSelectorContext } from '../context/CarSelectorContext'
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 const Model = () => {
   const [availableModel, setAvailableModels] = useState([])
-  const [selectedModel, setSelectedMake] = useState('')
+  const [selectedModel, setSelectedMake] = useState('Select Model')
   const [loading, setLoading] = useState(true)
 const {state, handleModelSelection} = useContext(CarSelectorContext)
 const getModels = async () => {
@@ -41,12 +42,7 @@ const getModels = async () => {
     
   }, [])
 
-  useEffect(()=>{
-    if(availableModel.length > 0){
-        setSelectedMake(availableModel[0].text)
-    }
-  },[availableModel])
-
+ 
 const handleSelect = (e)=>{
     setSelectedMake(e)
     handleModelSelection(e)
@@ -62,7 +58,7 @@ const handleSelect = (e)=>{
     <Listbox value={selectedModel} onChange={handleSelect} className="w-96">
         {({ open }) => (
           <>
-            <Listbox.Label className=" text-center block text-sm font-medium text-gray-700 dark:text-orange-400 ">Car Year</Listbox.Label>
+            <Listbox.Label className=" text-center block text-sm font-medium text-gray-700 dark:text-orange-400 ">Car model</Listbox.Label>
             <div className="relative mt-1 text-center">
               <Listbox.Button className="relative w-52 mx-auto cursor-pointer text-gray-900 rounded-md border border-gray-300 bg-white dark:text-gray-200 dark:bg-gray-700 dark:border-gray-900 py-2 pl-3 pr-10 text-left shadow-sm focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500 sm:text-sm">
                 <span className="block truncate">{selectedModel ? selectedModel : null}</span>

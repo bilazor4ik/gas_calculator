@@ -1,8 +1,6 @@
-
-import { CarSelectorContextProvider } from "./CarSelectorContext";
+import { CarSelectorContextProvider } from "./context/CarSelectorContext";
 import { DarkModeContextProvider } from "./context/DarkModeContext";
-
-import Home from "./pages/Home";
+import Home from "./Home";
 
 function App() {
   return (
