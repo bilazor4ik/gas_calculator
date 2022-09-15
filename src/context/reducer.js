@@ -3,7 +3,7 @@ export const reducer = (state,action)=>{
         case 'SELECT_YEAR':
           return ([{
             step: '01',
-            name: `Car Year: ${action.payload}`,
+            name: action.payload,
             status: 'complete',
             selectedYear: action.payload
         },
@@ -30,7 +30,7 @@ export const reducer = (state,action)=>{
         },
         {
             step: '02',
-            name: `Car Make: ${action.payload}`,
+            name: action.payload,
             status: 'complete',
             selectedMake: action.payload
         },
@@ -53,7 +53,7 @@ export const reducer = (state,action)=>{
         },
         {
             step: '03',
-            name: `Car Model: ${action.payload}`,
+            name: action.payload,
             status: 'complete',
             selectedModel: action.payload
         },
@@ -74,7 +74,7 @@ export const reducer = (state,action)=>{
         },
         {
             step: '04',
-            name: `Car Option: ${action.payload.text}`,
+            name: action.payload.text,
             status: 'complete',
             selectedOption: action.payload.value
         }])
